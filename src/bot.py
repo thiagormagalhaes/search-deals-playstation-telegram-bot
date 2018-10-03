@@ -12,9 +12,20 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 logger = logging.getLogger(__name__)
 
 
+def debug_log(msg):
+    """Printa uma mensagem de debug no console informando o tempo"""
+    now = datetime.datetime.now()
+    print(now.strftime("[%H:%M:%S] ->"), msg)
+
+
 def start(bot, update):
     """Mensagem inicial do comando /start"""
-    update.message.reply_text('Bem vindo ao meu primeiro bot')
+    update.message.reply_text("""
+    Bem-vindo ao meu primeiro bot! 
+    
+    Digite /help para ver uma lista de comandos uteis.
+    """)
+
 
 def help(bot, update):
     update.message.reply_text("""
@@ -27,6 +38,7 @@ def help(bot, update):
     /product ID - Retorna as informações do produto pelo ID passado.
     """)
 
+
 def list(bot, update, args):
     r = store.deals()
 
@@ -35,67 +47,85 @@ def list(bot, update, args):
     response += "*Descrição:* " + store.url()["name"] + "\n\n"
 
     if (len(args) > 0):
-      response += "Exibindo " + args[0] + " de " + str(store.totalGames()) + "\n"
+        response += "Exibindo " + args[0] + \
+            " de " + str(store.totalGames()) + "\n"
     else:
-      response += "Exibindo 30 de " + str(store.totalGames()) + "\n\n"
+        response += "Exibindo 30 de " + str(store.totalGames()) + "\n\n"
 
     update.message.reply_text(text=response, parse_mode="markdown")
 
     for product in r:
-      update.message.reply_text(product)
+        update.message.reply_text(product)
+
 
 def search(bot, update, args):
     if (len(args) == 0):
-      update.message.reply_text("É necessário informar uma palavra para realizar a busca.")
-      return
+        update.message.reply_text(
+            "É necessário informar uma palavra para realizar a busca.")
+        return
 
     count = 0
     r = store.url(store.totalGames())
-    update.message.reply_text("Aguarde... buscando em " + str(len(r["links"])) + " produtos")
+    update.message.reply_text(
+        "Aguarde... buscando em " + str(len(r["links"])) + " produtos")
     for product in r["links"]:
-      if (product["name"].lower().find(str(args[0]).lower()) >= 0):
-        count += 1
-        response = product["name"] + "\n"
+        if (product["name"].lower().find(str(args[0]).lower()) >= 0):
+            count += 1
+            response = product["name"] + "\n"
 
-        if "game_contentType" in product:
-          response += "Categoria: " + product["game_contentType"] + "\n"
+            if "game_contentType" in product:
+                response += "Categoria: " + product["game_contentType"] + "\n"
 
-        response += "Preço: " + product["default_sku"]["display_price"] + "\n"
-        response += "Promoção: " + product["default_sku"]["rewards"][0]["display_price"] + " (" + str(product["default_sku"]["rewards"][0]["discount"]) + "% de desconto)\n"
+            response += "Preço: " + \
+                product["default_sku"]["display_price"] + "\n"
+            response += "Promoção: " + product["default_sku"]["rewards"][0]["display_price"] + " (" + str(
+                product["default_sku"]["rewards"][0]["discount"]) + "% de desconto)\n"
 
-        if "bonus_display_price" in product["default_sku"]["rewards"][0]:
-          response += "Plus: " + product["default_sku"]["rewards"][0]["bonus_display_price"] + " (" + str(product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
+            if "bonus_display_price" in product["default_sku"]["rewards"][0]:
+                response += "Plus: " + product["default_sku"]["rewards"][0]["bonus_display_price"] + " (" + str(
+                    product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
 
-        response += "Preço promocional até " + product["default_sku"]["rewards"][0]["end_date"] + "\n"
+            response += "Preço promocional até " + \
+                product["default_sku"]["rewards"][0]["end_date"] + "\n"
 
-        response += "https://store.playstation.com/pt-br/product/" + product["id"]
-        update.message.reply_text(text=response)
+            response += "https://store.playstation.com/pt-br/product/" + \
+                product["id"]
+            update.message.reply_text(text=response)
 
     if (count == 0):
-      update.message.reply_text("Nenhum resultado para a palvra: " + args[0])
+        update.message.reply_text("Nenhum resultado para a palvra: " + args[0])
     else:
-      update.message.reply_text(str(count) + " resultado(s) encontrados para a palavra: " + args[0])
+        update.message.reply_text(
+            str(count) + " resultado(s) encontrados para a palavra: " + args[0])
+
 
 def product(bot, update, args):
     product = store.info(args[0])
 
     if "codeName" in product:
-      update.message.reply_text("Não foi encontrado produto com o código informado")
-      return
+        update.message.reply_text(
+            "Não foi encontrado produto com o código informado")
+        return
 
     response = "*Categoria:* " + product["game_contentType"] + "\n"
     response += "*Produto:* " + product["name"] + "\n"
     response += "*Preço:* " + product["default_sku"]["display_price"] + "\n"
-    response += "*Promoção:* " + product["default_sku"]["rewards"][0]["display_price"] + " (" + str(product["default_sku"]["rewards"][0]["discount"]) + "% de desconto)\n"
+    response += "*Promoção:* " + product["default_sku"]["rewards"][0]["display_price"] + \
+        " (" + str(product["default_sku"]["rewards"]
+                   [0]["discount"]) + "% de desconto)\n"
 
     if "bonus_display_price" in product["default_sku"]["rewards"][0]:
-      response += "*Plus:* " + product["default_sku"]["rewards"][0]["bonus_display_price"] + " (" + str(product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
+        response += "*Plus:* " + product["default_sku"]["rewards"][0]["bonus_display_price"] + \
+            " (" + str(product["default_sku"]["rewards"]
+                       [0]["bonus_discount"]) + "% de desconto)\n"
 
-    response += "*Preço promocional até " + product["default_sku"]["rewards"][0]["end_date"] + "*"
+    response += "*Preço promocional até " + \
+        product["default_sku"]["rewards"][0]["end_date"] + "*"
     print(response)
     update.message.reply_text(text=response, parse_mode="markdown")
     response = "https://store.playstation.com/pt-br/product/" + product["id"]
     update.message.reply_text(text=response)
+
 
 def echo(bot, update):
     """Responder comandos invalidos"""
@@ -109,8 +139,20 @@ def error(bot, update, error):
 
 def main():
     """Iniciar o bot"""
+    # Se o config.json não existir -> Criar token
+    if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json"):
+
+      if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/"):
+        os.makedirs(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/")
+        
+      token = {}
+      token['token'] = input("Copie aqui o token dado pelo @botfather: ")
+      with open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json", "w") as outfile:
+          json.dump(token, outfile)
+
     # Criar o EventHandler
-    config = json.loads(open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json").read())
+    config = json.loads(
+        open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json").read())
     updater = Updater(config["token"])
 
     # Obter o dispatcher para registrar os handlers
@@ -129,6 +171,8 @@ def main():
     # log de erros
     dp.add_error_handler(error)
 
+    # Informar inicialização do bot no console
+    debug_log("Bot inicializado com sucesso!")
     # Iniciar o Bot
     updater.start_polling()
 
