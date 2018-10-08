@@ -5,7 +5,7 @@
 *Bot* do Telegram para a *Playstation Store* em português (PlaystationStore)
 
 ## Funcionalidades básicas
-*    Consulta promoções por `titulo do game`.
+*   Consulta promoções por *titulo do game*.
 
 ## Implementações futuras
 *   Aceito sugestões :)
