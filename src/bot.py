@@ -1,4 +1,4 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler
+from telegram.ext import Updater, CommandHandler
 import datetime
 import logging
 import store
@@ -144,7 +144,7 @@ def main():
 
       if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/"):
         os.makedirs(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/")
-        
+
       token = {}
       token['token'] = input("Copie aqui o token dado pelo @botfather: ")
       with open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json", "w") as outfile:
