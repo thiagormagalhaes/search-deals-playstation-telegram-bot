@@ -1,4 +1,4 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram.ext import Updater, CommandHandler
 import datetime
 import logging
 import store
@@ -27,7 +27,7 @@ def start(bot, update):
     """)
 
 
-def help(bot, update):
+def about(bot, update):
     update.message.reply_text("""
     Bot para ver preços da PlayStation Store - em construção!
 
@@ -39,7 +39,7 @@ def help(bot, update):
     """)
 
 
-def list(bot, update, args):
+def listDeals(bot, update, args):
     r = store.deals()
 
     response = "*DETALHES*\n\n"
@@ -144,7 +144,7 @@ def main():
 
       if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/"):
         os.makedirs(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/")
-        
+
       token = {}
       token['token'] = input("Copie aqui o token dado pelo @botfather: ")
       with open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json", "w") as outfile:
@@ -160,13 +160,10 @@ def main():
 
     # comandos habilitados
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("list", list, pass_args=True))
+    dp.add_handler(CommandHandler("about", about))
+    dp.add_handler(CommandHandler("list", listDeals, pass_args=True))
     dp.add_handler(CommandHandler("search", search, pass_args=True))
     dp.add_handler(CommandHandler("product", product, pass_args=True))
-
-    # p/ comandos não reconhecidos
-    #dp.add_handler(MessageHandler(Filters.text, echo))
 
     # log de erros
     dp.add_error_handler(error)
