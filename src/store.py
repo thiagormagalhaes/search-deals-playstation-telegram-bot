@@ -17,17 +17,17 @@ def totalGames():
     return str(url()["total_results"])
 
 
-def url(size="30", store=allDeals(), type=game_contentType[0]):
-    if (type == "all"):
+def url(size="30", store=allDeals(), contentType=game_contentType[0]):
+    if (contentType == "all"):
         return requests.get(url=storeApiUrl()+store+"?size="+size).json()
     else:
-        return requests.get(url=storeApiUrl()+store+"?size="+size+"&game_content_type="+type).json()
+        return requests.get(url=storeApiUrl()+store+"?size="+size+"&game_content_type="+contentType).json()
 
 
-def deals(id=True):
+def deals(code=True):
     deals = list()
     r = url()
-    if (id):
+    if (code):
         for product in r["links"]:
             deals.append(product["name"] + " - " + product["id"])
     else:
@@ -36,5 +36,5 @@ def deals(id=True):
     return deals
 
 
-def info(id):
-    return requests.get(url=storeApiUrl()+id).json()
+def info(code):
+    return requests.get(url=storeApiUrl()+code).json()
