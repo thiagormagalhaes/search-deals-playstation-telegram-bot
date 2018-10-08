@@ -58,6 +58,23 @@ def listDeals(bot, update, args):
         update.message.reply_text(product)
 
 
+def format_response(product, response, format_character=''):
+    response += format_character + "Preço:" + format_character + " " + \
+        product["default_sku"]["display_price"] + "\n"
+    response += format_character + "Promoção:" + format_character + " " + \
+        product["default_sku"]["rewards"][0]["display_price"] + " (" + \
+        str(product["default_sku"]["rewards"][0]["discount"]) + "% de desconto)\n"
+
+    if "bonus_display_price" in product["default_sku"]["rewards"][0]:
+        response += format_character + "Plus:" + format_character + " " + \
+            product["default_sku"]["rewards"][0]["bonus_display_price"] + " (" + str(
+            product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
+
+    response += format_character + "Preço promocional até " + \
+                product["default_sku"]["rewards"][0]["end_date"] + format_character + "\n"
+    return response
+
+
 def search(bot, update, args):
     if (len(args) == 0):
         update.message.reply_text(
@@ -76,17 +93,7 @@ def search(bot, update, args):
             if "game_contentType" in product:
                 response += "Categoria: " + product["game_contentType"] + "\n"
 
-            response += "Preço: " + \
-                product["default_sku"]["display_price"] + "\n"
-            response += "Promoção: " + product["default_sku"]["rewards"][0]["display_price"] + " (" + str(
-                product["default_sku"]["rewards"][0]["discount"]) + "% de desconto)\n"
-
-            if "bonus_display_price" in product["default_sku"]["rewards"][0]:
-                response += "Plus: " + product["default_sku"]["rewards"][0]["bonus_display_price"] + " (" + str(
-                    product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
-
-            response += "Preço promocional até " + \
-                product["default_sku"]["rewards"][0]["end_date"] + "\n"
+            response = format_response(product, response)
 
             response += "https://store.playstation.com/pt-br/product/" + \
                 product["id"]
@@ -109,18 +116,7 @@ def product(bot, update, args):
 
     response = "*Categoria:* " + product["game_contentType"] + "\n"
     response += "*Produto:* " + product["name"] + "\n"
-    response += "*Preço:* " + product["default_sku"]["display_price"] + "\n"
-    response += "*Promoção:* " + product["default_sku"]["rewards"][0]["display_price"] + \
-        " (" + str(product["default_sku"]["rewards"]
-                   [0]["discount"]) + "% de desconto)\n"
-
-    if "bonus_display_price" in product["default_sku"]["rewards"][0]:
-        response += "*Plus:* " + product["default_sku"]["rewards"][0]["bonus_display_price"] + \
-            " (" + str(product["default_sku"]["rewards"]
-                       [0]["bonus_discount"]) + "% de desconto)\n"
-
-    response += "*Preço promocional até " + \
-        product["default_sku"]["rewards"][0]["end_date"] + "*"
+    response = format_response(product, response, '*')
     print(response)
     update.message.reply_text(text=response, parse_mode="markdown")
     response = "https://store.playstation.com/pt-br/product/" + product["id"]
