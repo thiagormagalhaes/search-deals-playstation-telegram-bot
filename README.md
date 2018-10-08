@@ -1,4 +1,7 @@
 ## Search Deals Playstation *telegram bot*
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/99dd3531239e4be980fc271c23429312)](https://app.codacy.com/app/thiagormagalhaes/search-deals-playstation-telegram-bot?utm_source=github.com&utm_medium=referral&utm_content=thiagormagalhaes/search-deals-playstation-telegram-bot&utm_campaign=Badge_Grade_Dashboard)
+
 *Bot* do Telegram para a *Playstation Store* em português (PlaystationStore)
 
 #### Funcionalidades básicas
