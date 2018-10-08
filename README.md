@@ -8,14 +8,14 @@
 *    Consulta promoções por `titulo do game`.
 
 ## Implementações futuras
-*    Aceito sugestões :)
+*   Aceito sugestões :)
 
 ## Instalação e configuração
 1.  Instalação das dependências:
 `pip install -r requirements.txt`
 
 2.  Configuração do *token* de acesso ao *bot*:
-  *   Criar o diretório `config/`, com o arquivo `token.json`, no formato:
+*   Criar o diretório `config/`, com o arquivo `token.json`, no formato:
 
       `{"token": "seu_token_aqui"}`
 
