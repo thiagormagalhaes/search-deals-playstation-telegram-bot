@@ -4,6 +4,6 @@ python:
 install:
     - pip install -q -r requirements.txt
 # Continuação do Script
-#script:
+script:
 # - script para executar os testes da aplicação, por exemplo: python tests.py ou
-# - pytest
+    - pytest
