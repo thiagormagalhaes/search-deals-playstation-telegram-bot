@@ -33,8 +33,8 @@
      `nohup python3 bot.py &`
      
 ### Instalação usando Docker
-1. Fazer a construção da imagem:
+1.  Fazer a construção da imagem:
 `docker build -t search-psn:v1 .`
 
-2. Executar:
+2.  Executar:
 `docker run -d --name search-psn search-psn`
