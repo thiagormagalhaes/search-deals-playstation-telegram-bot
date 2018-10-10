@@ -16,6 +16,7 @@
 1.  Instalação das dependências:
 `pip install -r requirements.txt`
 
+
 2.  Configuração do *token* de acesso ao *bot*:
 *   Criar o diretório `config/`, com o arquivo `token.json`, no formato:
 
@@ -30,3 +31,10 @@
      Para deixar executando em *background* e independente da sessão do *tty*:
 
      `nohup python3 bot.py &`
+     
+### Instalação usando Docker
+1. Fazer a construção da imagem:
+`docker build -t search-psn:v1 .`
+
+2. Executar:
+`docker run -d --name search-psn search-psn`
