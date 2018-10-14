@@ -1,40 +1,44 @@
-## Search Deals Playstation - *Telegram Bot*
+# Search Deals Playstation - _Telegram Bot_
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/99dd3531239e4be980fc271c23429312)](https://app.codacy.com/app/thiagormagalhaes/search-deals-playstation-telegram-bot?utm_source=github.com&utm_medium=referral&utm_content=thiagormagalhaes/search-deals-playstation-telegram-bot&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/thiagormagalhaes/search-deals-playstation-telegram-bot.svg?branch=master)](https://travis-ci.org/thiagormagalhaes/search-deals-playstation-telegram-bot)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a3850ce887c38eaac7da/maintainability)](https://codeclimate.com/github/thiagormagalhaes/search-deals-playstation-telegram-bot/maintainability)
 
-*Bot* do Telegram para a *Playstation Store* em português (PlaystationStore)
+_Bot_ do Telegram para a _Playstation Store_ em português (PlaystationStore)
 
 ## Funcionalidades básicas
-*   Consulta promoções por *titulo do game*.
+
+      - Consulta promoções por _titulo do game_.
 
 ## Implementações futuras
-*   Aceito sugestões :)
+
+      - Aceito sugestões :)
 
 ## Instalação e configuração
-1.  Instalação das dependências:
-`pip install -r requirements.txt`
 
+      1. Instalação das dependências:
 
-2.  Configuração do *token* de acesso ao *bot*:
-*   Criar o diretório `config/`, com o arquivo `token.json`, no formato:
+            `pip install -r requirements.txt`
 
-      `{"token": "seu_token_aqui"}`
+      2. Configuração do _token_ de acesso ao _bot_:
 
-      **OBS**: O *token* é gerado quando o *bot* é criado no [*@botfather*](https://telegram.me/BotFather)
-      
-3.  Executar o arquivo `src/bot.py`:
+            - Criar o diretório `config/`, com o arquivo `token.json`, no formato:
 
-     `python3 bot.py`
+            `{"token": "seu_token_aqui"}`
 
-     Para deixar executando em *background* e independente da sessão do *tty*:
+      **OBS**: O _token_ é gerado quando o _bot_ é criado no [_@botfather_](https://telegram.me/BotFather)
 
-     `nohup python3 bot.py &`
-     
+      3. Executar o arquivo `src/bot.py`:
+
+            `python3 bot.py`
+
+      Para deixar executando em _background_ e independente da sessão do _tty_:
+
+            `nohup python3 bot.py &`
+
 ### Instalação usando Docker
-1.  Fazer a construção da imagem:
-`docker build -t search-psn:v1 .`
 
-2.  Executar:
-`docker run -d --name search-psn search-psn`
+      1. Fazer a construção da imagem:
+            `docker build -t search-psn:v1 .`
+      2. Executar:
+            `docker run -d --name search-psn search-psn`

@@ -1,14 +1,14 @@
 language: python
 python:
-    - "3.6"
+  - "3.6"
 services:
-    - docker
+  - docker
 
 install:
-    - pip install -q -r requirements.txt
-    - docker build -t search-psn .
+  - pip install -q -r requirements.txt
+  - docker build -t search-psn .
 # Continuação do Script
 
 script:
-# - script para executar os testes da aplicação, por exemplo: python tests.py ou
-    - pytest
+  # - script para executar os testes da aplicação, por exemplo: python tests.py ou
+  - pytest -vv -s --cov=. --cov-report xml:coverage/coverage.xml --cov-report html:coverage/coverage_html --cov-report term-missing tests

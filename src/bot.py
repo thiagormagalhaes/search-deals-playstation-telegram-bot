@@ -66,17 +66,20 @@ def format_response(product, response, format_character=''):
             product["default_sku"]["display_price"] + "\n"
         response += format_character + "Promoção:" + format_character + " " + \
             product["default_sku"]["rewards"][0]["display_price"] + " (" + \
-            str(product["default_sku"]["rewards"][0]["discount"]) + "% de desconto)\n"
+            str(product["default_sku"]["rewards"][0]
+                ["discount"]) + "% de desconto)\n"
 
         if "bonus_display_price" in product["default_sku"]["rewards"][0]:
             response += format_character + "Plus:" + format_character + " " + \
                 product["default_sku"]["rewards"][0]["bonus_display_price"] + " (" + str(
-                product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
+                    product["default_sku"]["rewards"][0]["bonus_discount"]) + "% de desconto)\n"
 
         response += format_character + "Preço promocional até " + \
-                    product["default_sku"]["rewards"][0]["end_date"] + format_character + "\n"
+            product["default_sku"]["rewards"][0]["end_date"] + \
+            format_character + "\n"
     else:
-        response += format_character + "Promoção:" + format_character + " Nenhum preço promocional encontrado! \n"
+        response += format_character + "Promoção:" + \
+            format_character + " Nenhum preço promocional encontrado! \n"
 
     return response
 
@@ -144,13 +147,13 @@ def main():
     # Se o config.json não existir -> Criar token
     if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json"):
 
-      if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/"):
-        os.makedirs(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/")
+        if not os.path.exists(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/"):
+            os.makedirs(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/")
 
-      token = {}
-      token['token'] = input("Copie aqui o token dado pelo @botfather: ")
-      with open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json", "w") as outfile:
-          json.dump(token, outfile)
+        token = {}
+        token['token'] = input("Copie aqui o token dado pelo @botfather: ")
+        with open(os.getcwd()[0:int(len(os.getcwd())-4)]+"/config/token.json", "w") as outfile:
+            json.dump(token, outfile)
 
     # Criar o EventHandler
     config = json.loads(
