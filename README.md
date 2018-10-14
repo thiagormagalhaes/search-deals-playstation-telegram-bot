@@ -20,21 +20,20 @@ _Bot_ do Telegram para a _Playstation Store_ em português (PlaystationStore)
 
             `pip install -r requirements.txt`
 
-      2. Configuração do _token_ de acesso ao _bot_:
+      2.  Configuração do _token_ de acesso ao _bot_:
+            O _token_ é gerado quando o _bot_ é criado no [*@botfather*] acesse:(https://telegram.me/BotFather)
 
-            - Criar o diretório `config/`, com o arquivo `token.json`, no formato:
+      3.  Executar o arquivo `app.py`:
 
-            `{"token": "seu_token_aqui"}`
+            `python3 app.py`
 
-      **OBS**: O _token_ é gerado quando o _bot_ é criado no [_@botfather_](https://telegram.me/BotFather)
-
-      3. Executar o arquivo `src/bot.py`:
-
-            `python3 bot.py`
-
-      Para deixar executando em _background_ e independente da sessão do _tty_:
+            Para deixar executando em _background_ e independente da sessão do _tty_:
 
             `nohup python3 bot.py &`
+
+## Run Testes/Coverage
+
+      `pytest -vv -s --cov=. --cov-report xml:coverage/coverage.xml --cov-report html:coverage/coverage_html --cov-report term-missing tests`
 
 ### Instalação usando Docker
 

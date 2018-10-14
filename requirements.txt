@@ -1,4 +1,7 @@
 python-telegram-bot==10.1.0
 requests==2.19.1
+python-decouple==3.0
 pytest==3.8.2
 pytest-cov==2.6.0
+python-dotenv==0.9.1
+coverage==4.5.1

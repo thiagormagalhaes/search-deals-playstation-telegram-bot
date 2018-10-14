@@ -1,7 +1,15 @@
 *.json
 __pycache__/
-config/
 
-** coverage **
-.coverage/
-ignore/
+## coverage
+coverage/
+.coverage
+
+## vscode
+.vscode
+
+## pycharm
+.idea/
+
+#enviroments
+.env
