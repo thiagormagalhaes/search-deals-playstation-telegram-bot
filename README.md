@@ -8,36 +8,40 @@ _Bot_ do Telegram para a _Playstation Store_ em português (PlaystationStore)
 
 ## Funcionalidades básicas
 
-      - Consulta promoções por _titulo do game_.
+  - Consulta promoções por _titulo do game_.
 
 ## Implementações futuras
 
-      - Aceito sugestões :)
+  - Aceito sugestões :)
 
 ## Instalação e configuração
 
-      1. Instalação das dependências:
+  1. Instalação das dependências:
 
-            `pip install -r requirements.txt`
+            pip install -r requirements.txt
 
-      2.  Configuração do _token_ de acesso ao _bot_:
+  2.  Configuração do _token_ de acesso ao _bot_:
+    
             O _token_ é gerado quando o _bot_ é criado no [*@botfather*] acesse:(https://telegram.me/BotFather)
 
-      3.  Executar o arquivo `app.py`:
+  3.  Executar o arquivo `app.py`:
 
-            `python3 app.py`
+            python3 app.py
 
-            Para deixar executando em _background_ e independente da sessão do _tty_:
+        Para deixar executando em _background_ e independente da sessão do _tty_:
 
             `nohup python3 bot.py &`
 
 ## Run Testes/Coverage
 
-      `pytest -vv -s --cov=. --cov-report xml:coverage/coverage.xml --cov-report html:coverage/coverage_html --cov-report term-missing tests`
+    pytest -vv -s --cov=. --cov-report xml:coverage/coverage.xml --cov-report html:coverage/coverage_html --cov-report term-missing tests
 
-### Instalação usando Docker
+## Instalação usando Docker
 
-      1. Fazer a construção da imagem:
-            `docker build -t search-psn:v1 .`
-      2. Executar:
-            `docker run -d --name search-psn search-psn`
+  1.  Fazer a construção da imagem:
+
+            docker build -t search-psn:v1 .
+
+  2.  Executar:
+
+            docker run -d --name search-psn search-psn
