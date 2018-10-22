@@ -6,9 +6,15 @@ services:
 
 install:
   - pip install -q -r requirements.txt
+  # Configurar aqui a chave do Coverage do Codacy <substituir o token>
+  - export CODACY_PROJECT_TOKEN=$CODACY_PROJECT_TOKEN
   - docker build -t search-psn .
 # Continuação do Script
 
 script:
   # - script para executar os testes da aplicação, por exemplo: python tests.py ou
   - pytest -vv -s --cov=. --cov-report xml:coverage/coverage.xml --cov-report html:coverage/coverage_html --cov-report term-missing tests
+
+after_success:
+  # - script para atualizar a cobertura no codacy
+  - python-codacy-coverage -r coverage/coverage.xml
