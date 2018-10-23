@@ -32,7 +32,7 @@ def start(bot, update):
     update.message.reply_text("""
     Bem-vindo ao meu primeiro bot!
 
-    Digite / help para ver uma lista de comandos uteis.
+    Digite /about para ver uma lista de comandos uteis.
     """)
 
 
