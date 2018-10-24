@@ -2,6 +2,7 @@ from unittest import TestCase
 from unittest.mock import Mock, patch
 from src.store import Store
 
+
 class TestStore(TestCase):
 
     def setUp(self):
@@ -12,7 +13,7 @@ class TestStore(TestCase):
         total_games = 12345
         _url.return_value = {"total_results": total_games}
 
-        resp = self.store.totalGames()
+        resp = self.store.total_games()
 
         self.assertEqual(resp, str(total_games))
 

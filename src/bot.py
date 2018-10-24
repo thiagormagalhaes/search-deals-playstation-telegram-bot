@@ -60,17 +60,18 @@ def search(bot, update, args):
             "É necessário informar uma palavra para realizar a busca.")
         return
 
-    response = STORE.url(STORE.totalGames())
+    response = STORE.url(STORE.total_games())
     update.message.reply_text(
         "Aguarde... buscando em " + str(len(response["links"])) + " produtos")
 
     _list = STORE.format_list(response, args[0])
 
     for item in _list:
-        update.message.reply_text(text=item)
+        update.message.reply_text(text=item, parse_mode="markdown")
 
     if (len(_list) == 0):
-        update.message.reply_text("Nenhum resultado para a palvra: " + args[0])
+        update.message.reply_text(
+            "Nenhum resultado para a palavra: " + args[0])
     else:
         update.message.reply_text(
             str(len(_list)) + " resultado(s) encontrados para a palavra: " + args[0])
@@ -81,8 +82,6 @@ def product(bot, update, args):
     try:
         response = STORE.product(args)
         update.message.reply_text(text=response, parse_mode="markdown")
-        link = STORE.product_link(args[0])
-        update.message.reply_text(text=link)
     except ValueError:
         update.message.reply_text(
             "Não foi encontrado produto com o código informado")

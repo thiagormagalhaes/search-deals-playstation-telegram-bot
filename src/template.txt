@@ -1,0 +1,11 @@
+*Produto:* {{ name }}
+{% if category %}*Categoria:* {{ category }} {% endif %}
+{% if price %}*Preço:* {{ price }}
+*Promoção:* {{ price_rewards }} ({{ discount }} de desconto)
+{% if bonus_price %}*Plus:* {{ bonus_price }} ({{bonus_discount }} de desconto){% endif %}
+*Preço promocional até {{ end_date }}*
+{% else %}
+Nenhum preço promocional encontrado!
+{% endif %}
+[{{ name }}]({{ link }})
+
