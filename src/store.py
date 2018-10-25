@@ -11,7 +11,7 @@ templateEnv = jinja2.Environment(
     autoescape=jinja2.select_autoescape(
         disabled_extensions=('txt',),
         default_for_string=True,
-        default=True,
+        default=False,
     ))
 
 TEMPLATE_FILE = "template.txt"
@@ -53,7 +53,7 @@ class Store():
     def product(self, args, error=""):
         product = self.info(args[0])
 
-        dct = self.parser_product_to_dict(product)
+        dct = self.product_to_dict(product)
         return label.render(dct)
 
     @classmethod
@@ -83,7 +83,7 @@ class Store():
         return response
 
     @classmethod
-    def parser_product_to_dict(self, product):
+    def product_to_dict(self, product):
 
         d = dict()
         d["name"] = product["name"]
@@ -121,7 +121,7 @@ class Store():
 
             if (product["name"].lower().find(str(text_search).lower()) >= 0):
 
-                dct = self.parser_product_to_dict(product)
+                dct = self.product_to_dict(product)
                 _list.append(label.render(dct))
 
         return _list
